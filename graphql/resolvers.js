@@ -14,16 +14,35 @@ const resolvers = {
         },
         login: (_, args) => {
             const credential = args.email ? {email:args.email} : {userName:args.userName};
-            User.findOne({where: credential}).then(user => {
-                // take password and prepend salt
-                // compare with hash
-                // return JWT if match
-                // return null if don't
-                // return null if no user
-                console.log(user)
-            });
-            return "Wow!";
+            return User.findOne({where: credential})
+                .then(user => {
+                    //TODO LOGIN
+                    let bcrypt = require('bcrypt');
+                    return bcrypt.compare(args.password, user.hash)
+                        .then(match => {
+                            if(match) {
+                                return {message: 'OK', token: "TODO a JWT token", error: ""};
+                            } else {
+                                return {message: 'ERROR', error: "Usuario o Contraseña Invalidos"};
+                            }
+                        })
+                })
+                .catch((error) => {
+                    return {message: 'ERROR', error: "Usuario o Contraseña Invalidos"};
+                })
+            ;
         }
     },
+    Mutation: {
+        //Test mutation
+        test: (_, args) => {
+            //TODO check TODOS
+            let bcrypt = require('bcrypt');
+            const saltRounds = 10;
+            return bcrypt.hash(args.password, saltRounds).then(hash => {
+                return User.create({userName: args.userName, email: args.email, hash: hash}).then( () => {return true})
+            });
+        }
+    }
 };
 module.exports.resolvers =resolvers;

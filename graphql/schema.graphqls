@@ -1,4 +1,5 @@
 scalar Date
+scalar Token
 
 type Card {
     id: ID!,
@@ -37,5 +38,9 @@ type User {
 type Query {
     allCards: [Card],
     allPassengers: [Passenger],
-    login(userName: String, email: String, password: String!): String!
+    login(userName: String, email: String, password: String!): Token!
+}
+
+type Mutation {
+    test(userName:String!,email:String!, password: String!): Boolean!
 }
