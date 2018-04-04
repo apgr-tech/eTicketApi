@@ -2,7 +2,6 @@
   "name": "eticketapi",
   "version": "0.0.1",
   "description": "eTicket Api Server by AppGrade Tech",
-  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
