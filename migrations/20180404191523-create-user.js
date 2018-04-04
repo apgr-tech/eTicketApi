@@ -9,7 +9,7 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       passengerId: {
-        type: Sequelize.INT
+        type: Sequelize.INTEGER
       },
       userName: {
         type: Sequelize.STRING
@@ -18,7 +18,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       role: {
-        type: Sequelize.INT
+        type: Sequelize.INTEGER
       },
       salt: {
         type: Sequelize.STRING

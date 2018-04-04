@@ -1,8 +1,8 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   var Passenger = sequelize.define('Passenger', {
-    type: DataTypes.INT,
-    cardId: DataTypes.INT,
+    type: DataTypes.INTEGER,
+    cardId: DataTypes.INTEGER,
     name: DataTypes.STRING,
     lastName: DataTypes.STRING,
     doc_type: DataTypes.STRING,
