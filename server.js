@@ -1,16 +1,11 @@
-const { GraphQLServer } = require('graphql-yoga')
+const { GraphQLServer } = require('graphql-yoga');
 
-const typeDefs = `
-  type Query {
-    hello(name: String): String!
-  }
-`;
+//Types Definitions
+const fs = require('fs');
+const typeDefs = fs.readFileSync('./graphql/schema.graphqls', "utf8");
 
-const resolvers = {
-    Query: {
-        hello: (_, { name }) => `Hello ${name || 'World'}`,
-    },
-};
+//Resolvers
+const { resolvers } = require('./graphql/resolvers');
 
 const server = new GraphQLServer({ typeDefs, resolvers });
 server.start(() => console.log('Server is running on localhost:4000'));

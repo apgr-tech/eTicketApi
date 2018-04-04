@@ -1,0 +1,41 @@
+scalar Date
+
+type Card {
+    id: ID!,
+    uid: String,
+    active: Boolean,
+    keyA: String,
+    keyB: String,
+    createdAt: Date,
+    updatedAt: Date
+}
+
+type Passenger {
+    id: ID!,
+    type: Int!,
+    cardId: Int!,
+    name: String!,
+    lastName: String!,
+    doc_type: String!,
+    document: String!,
+    createdAt: Date,
+    updatedAt: Date
+}
+
+type User {
+    id: ID!,
+    passengerId: Passenger,
+    userName: String,
+    email: String!,
+    role: Int,
+    salt: String,
+    hash: String,
+    createdAt: Date,
+    updatedAt: Date
+}
+
+type Query {
+    allCards: [Card],
+    allPassengers: [Passenger],
+    login(userName: String, email: String, password: String!): String!
+}
