@@ -13,14 +13,13 @@ const resolvers = {
             })
         },
         login: (_, args) => {
-            const credential = args.email ? {email:args.email} : {userName:args.userName};
-            return User.findOne({where: credential})
+            return User.findOne({where: args.email ? {email:args.email} : {userName:args.userName}})
                 .then(user => {
                     let bcrypt = require('bcrypt');
                     return bcrypt.compare(args.password, user.hash)
                         .then(match => {
                             if(match) {
-                                return {message: 'OK', token: "TODO a JWT token", error: ""};
+                                return {message: 'OK', token: "TODO a JWT token"};
                             } else {
                                 return {message: 'ERROR', error: "Usuario o Contraseña Invalidos"};
                             }

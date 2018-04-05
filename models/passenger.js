@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
     cardId: DataTypes.INTEGER,
     name: DataTypes.STRING,
     lastName: DataTypes.STRING,
-    doc_type: DataTypes.STRING,
+    docType: DataTypes.STRING,
     document: DataTypes.STRING
   }, {});
   Passenger.associate = function(models) {
