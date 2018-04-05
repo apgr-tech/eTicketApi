@@ -39,6 +39,13 @@ type User {
     updatedAt: Date
 }
 
+type Role {
+    id: ID!,
+    name: String!
+    createdAt: Date,
+    updatedAt: Date
+}
+
 type Query {
     allCards: [Card],
     allPassengers: [Passenger],

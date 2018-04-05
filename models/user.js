@@ -4,7 +4,7 @@ module.exports = (sequelize, DataTypes) => {
         passengerId: DataTypes.INTEGER,
         userName: DataTypes.STRING,
         email: DataTypes.STRING,
-        role: DataTypes.INTEGER,
+        roleId: DataTypes.INTEGER,
         name: DataTypes.STRING,
         lastName: DataTypes.STRING,
         docType: DataTypes.STRING,
@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
         hash: DataTypes.STRING
     }, {});
     User.associate = function(models) {
-        // associations can be defined here
+        return models.User.belongsTo(models.Role)
     };
     return User;
 };
