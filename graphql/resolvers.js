@@ -1,17 +1,7 @@
-const {Sequelize, Card, Passenger, User} = require('../models/index');
+const {Sequelize, Menu, User} = require('../models/index');
 //const Ops = Sequelize.Op;
 const resolvers = {
     Query: {
-        allCards: () => {
-            Card.findAll().then(cards => {
-                return cards;
-            });
-        },
-        allPassengers: () => {
-            Passenger.findAll().then(passengers => {
-                return passengers
-            })
-        },
         login: (_, args) => {
             return User.findOne({where: args.email ? {email:args.email} : {userName:args.userName}})
                 .then(user => {
@@ -21,17 +11,35 @@ const resolvers = {
                             if(match) {
                                 return {message: 'OK', token: "TODO a JWT token"};
                             } else {
-                                return {message: 'ERROR', error: "Usuario o Contraseña Invalidos"};
+                                return new Sequelize.Error("Usuario o Contraseña Invalidos");
                             }
+                        })
+                        .catch(error => {
+                            return new Sequelize.Error("Usuario o Contraseña Invalidos");
                         })
                 })
                 .catch((error) => {
-                    return {message: 'ERROR', error: "Usuario o Contraseña Invalidos"};
-                })
-            ;
+                    return error;
+                });
+
         }
     },
     Mutation: {
+        //Menu CRUD
+        cMenu(_, args) {
+            return Menu.create(args)
+                .then(menu => {
+                    return menu
+                })
+                .catch(Sequelize.UniqueConstraintError, (error) => {
+                    error.message = "Ya existe este Menú";
+                    return error;
+                })
+                .catch(error => {
+                    return error;
+                })
+
+        },
         //Test mutation
         test: (_, args) => {
             //TODO check TODOS
