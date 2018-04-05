@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
         hash: DataTypes.STRING
     }, {});
     User.associate = function(models) {
-        return models.User.belongsTo(models.Role)
+        models.User.belongsTo(models.Role)
     };
     return User;
 };
