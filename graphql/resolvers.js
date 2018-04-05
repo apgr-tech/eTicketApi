@@ -1,8 +1,8 @@
 const {Sequelize, Card, Passenger, User} = require('../models/index');
-const Ops = Sequelize.Op;
+//const Ops = Sequelize.Op;
 const resolvers = {
     Query: {
-        allCards: (_) => {
+        allCards: () => {
             Card.findAll().then(cards => {
                 return cards;
             });
@@ -16,7 +16,6 @@ const resolvers = {
             const credential = args.email ? {email:args.email} : {userName:args.userName};
             return User.findOne({where: credential})
                 .then(user => {
-                    //TODO LOGIN
                     let bcrypt = require('bcrypt');
                     return bcrypt.compare(args.password, user.hash)
                         .then(match => {
