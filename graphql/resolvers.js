@@ -9,6 +9,7 @@ const resolvers = {
                     return bcrypt.compare(args.password, user.hash)
                         .then(match => {
                             if(match) {
+                                //TODO return JWT token
                                 return {message: 'OK', token: "TODO a JWT token"};
                             } else {
                                 return new Sequelize.Error("Usuario o Contraseña Invalidos");
@@ -19,9 +20,13 @@ const resolvers = {
                         })
                 })
                 .catch((error) => {
-                    return error;
+                    return new Sequelize.Error("Usuario o Contraseña Invalidos");
                 });
-
+        },
+        allMenus() {
+            return Menu.findAll({include:[{model:Menu, as:'subMenus'}], where: {active:true, parentID: null}}).then(menu=>{
+                return menu;
+            })
         }
     },
     Mutation: {

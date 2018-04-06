@@ -53,14 +53,14 @@ type Menu {
     target: String,
     component: String,
     active: Boolean,
+    subMenus:[Menu]
     createdAt: Date,
     updatedAt: Date
 }
 
 type Query {
-    login(userName: String, email: String, password: String!): Token!
-    menu:[Menu]
-
+    login(userName: String, email: String, password: String!): Token!,
+    allMenus:[Menu]!
 }
 
 type Mutation {
