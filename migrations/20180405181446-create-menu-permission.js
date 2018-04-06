@@ -1,24 +1,30 @@
 'use strict';
 module.exports = {
     up: (queryInterface, Sequelize) => {
-        return queryInterface.createTable('Cards', {
+        return queryInterface.createTable('MenuPermissions', {
             id: {
                 allowNull: false,
                 autoIncrement: true,
                 primaryKey: true,
                 type: Sequelize.INTEGER
             },
-            uid: {
-                type: Sequelize.STRING
+            roleId: {
+                type: Sequelize.INTEGER
             },
-            active: {
+            menuId: {
+                type: Sequelize.INTEGER
+            },
+            canCreate: {
                 type: Sequelize.BOOLEAN
             },
-            keyA: {
-                type: Sequelize.STRING
+            canRead: {
+                type: Sequelize.BOOLEAN
             },
-            keyB: {
-                type: Sequelize.STRING
+            canUpdate: {
+                type: Sequelize.BOOLEAN
+            },
+            canDelete: {
+                type: Sequelize.BOOLEAN
             },
             createdAt: {
                 allowNull: false,
@@ -31,6 +37,6 @@ module.exports = {
         });
     },
     down: (queryInterface, Sequelize) => {
-        return queryInterface.dropTable('Cards');
+        return queryInterface.dropTable('MenuPermissions');
     }
 };

@@ -3,6 +3,8 @@
 [X] migration to remove salt field in User
 [ ] model associations
 [ ] menu
+[ ] get menus (all)
+[ ] get menus by role
 [ ] properly Auth with JWT
 [ ] registration flow (username gen, already exists?, mail confirmation etc)
 [ ] roles

@@ -46,12 +46,26 @@ type Role {
     updatedAt: Date
 }
 
+type Menu {
+    id: ID!
+    label: String!,
+    parentId: Int,
+    target: String,
+    component: String,
+    active: Boolean,
+    subMenus:[Menu]
+    createdAt: Date,
+    updatedAt: Date
+}
+
 type Query {
-    allCards: [Card],
-    allPassengers: [Passenger],
-    login(userName: String, email: String, password: String!): Token!
+    login(userName: String, email: String, password: String!): Token!,
+    allMenus:[Menu]!
 }
 
 type Mutation {
+    cMenu(label:String!, parentId:Int, target:String, component:String, active:Boolean): Menu
+    uMenu(Id:ID!, label:String!, parentId:Int, target:String, component:String, active:Boolean): Menu
+    dMenu(Id:ID!, label:String!, parentId:Int, target:String, component:String, active:Boolean): Menu
     test(userName:String!,email:String!, password: String!): Boolean!
 }
