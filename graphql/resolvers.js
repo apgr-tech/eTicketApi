@@ -24,8 +24,16 @@ const resolvers = {
                 });
         },
         allMenus() {
-            return Menu.findAll({include:[{model:Menu, as:'subMenus'}], where: {active:true, parentID: null}}).then(menu=>{
-                return menu;
+            return Menu.findAll(
+                {
+                    include: [{model:Menu, as:'subMenus'}],
+                    where: {active:true, parentID: null},
+                    order: [
+                        [{model:Menu, as:'subMenus'}, 'order', 'ASC'],
+                        ['order', 'ASC']
+                    ]
+                }).then(menus => {
+                return menus;
             })
         }
     },
@@ -43,7 +51,12 @@ const resolvers = {
                 .catch(error => {
                     return error;
                 })
-
+        },
+        uMenu(_,args) {
+            return 'updated'
+        },
+        dMenu(_, args) {
+            return 'soft deleted'
         },
         //Test mutation
         test: (_, args) => {
@@ -56,4 +69,4 @@ const resolvers = {
         }
     }
 };
-module.exports.resolvers =resolvers;
+module.exports.resolvers = resolvers;
